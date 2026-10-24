@@ -1,0 +1,90 @@
+{
+  "name": "live-collab",
+  "displayName": "Live Collaboration",
+  "description": "Real-time multiplayer code collaboration secured by GitHub repository permissions",
+  "version": "1.0.0",
+  "publisher": "vscode",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "liveCollab.startSession",
+        "title": "Start Collaboration Session",
+        "category": "Live Collab"
+      },
+      {
+        "command": "liveCollab.joinSession",
+        "title": "Join Collaboration Session",
+        "category": "Live Collab"
+      },
+      {
+        "command": "liveCollab.stopSession",
+        "title": "End Collaboration Session",
+        "category": "Live Collab"
+      },
+      {
+        "command": "liveCollab.copyInviteLink",
+        "title": "Copy Collaboration Invite Link",
+        "category": "Live Collab"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "live-collab-explorer",
+          "title": "Live Collab",
+          "icon": "$(broadcast)"
+        }
+      ]
+    },
+    "views": {
+      "live-collab-explorer": [
+        {
+          "id": "liveCollab.peersView",
+          "name": "Active Collaborators"
+        },
+        {
+          "id": "liveCollab.sessionView",
+          "name": "Session Details"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Live Collaboration",
+      "properties": {
+        "liveCollab.defaultPort": {
+          "type": "number",
+          "default": 8989,
+          "description": "Default local port for the collaboration WebSocket server."
+        },
+        "liveCollab.autoSaveRemoteChanges": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically write incoming collaborator edits to disk on the host."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "npx gulp compile-extension:live-collab",
+    "watch": "npx gulp watch-extension:live-collab"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.x",
+    "@types/ws": "^8.18.1",
+    "typescript": "^6.0.3"
+  }
+}
